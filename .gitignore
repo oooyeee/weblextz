@@ -3,3 +3,8 @@ node_modules/
 .env
 .env*
 keys.json
+scripts/heroku_set_container.ps1
+
+#============================ nested
+**/node_modules/
+**/keys.json
