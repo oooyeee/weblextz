@@ -37,8 +37,6 @@ let ev = new EventEmitter();
 
 public_app.get("/", async (req, res) => {
 
-
-
     let json1 = await fetch("http://localhost:" + local_port1, {
         method: "GET"
     }).then(resp => resp.json())
