@@ -37,6 +37,8 @@ let ev = new EventEmitter();
 
 public_app.get("/", async (req, res) => {
 
+    let realIP = req.headers["x-forwarded-for"] ?? "real ip is not forwarded"
+
     let json1 = await fetch("http://localhost:" + local_port1, {
         method: "GET"
     }).then(resp => resp.json())
@@ -49,7 +51,8 @@ public_app.get("/", async (req, res) => {
 
     res.setHeader("Content-Type", "application/json")
     res.send(JSON.stringify({
-        "hello": req.ip,
+        "hello": realIP,
+        "internal_ip": req.ip,
         json1,
         json2
     }, null, 2))
