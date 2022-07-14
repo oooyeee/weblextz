@@ -1,0 +1,1 @@
+echo "got port $PORT" >> gotport.txt

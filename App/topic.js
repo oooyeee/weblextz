@@ -6,7 +6,7 @@ async function run() {
     try {
         const kafka = new Kafka.Kafka({
             "clientId": "myapp",
-            "brokers": ["localhost:9092"]
+            "brokers": ["https://oooyeee-test.herokuapp.com:9092"]
         })
 
         const admin = kafka.admin()

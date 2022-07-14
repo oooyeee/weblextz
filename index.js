@@ -1,5 +1,10 @@
 import { EventEmitter } from "events"
+import { fileURLToPath } from "url"
+import fs from "fs"
+import path from "path"
 import express from "express"
+
+const __projdir = path.dirname(fileURLToPath(import.meta.url))
 
 const public_port = process.env["PORT"] ?? process.env["$PORT"] ?? 9999
 const pport = process.env["PORT"] ?? "PORT"
@@ -50,6 +55,9 @@ public_app.get("/", async (req, res) => {
     }).then(resp => resp.json())
         .catch(err => { return JSON.stringify({ "error": "true", "message": err.message ?? "dummy error message" }) })
 
+
+    let file_with_port = Buffer.from(fs.readFileSync(path.join(__projdir, "/saveport.sh"), { flag: "r+" })).toString("utf8")
+
     res.setHeader("Content-Type", "application/json")
     res.send(JSON.stringify({
         "hello": realIP,
@@ -58,7 +66,8 @@ public_app.get("/", async (req, res) => {
         json2,
         envports: {
             pport,
-            dport
+            dport,
+            gotenv: file_with_port
         }
     }, null, 2))
 })
