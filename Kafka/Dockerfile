@@ -30,7 +30,7 @@ RUN chmod 751 /etc/init.d/kafka
 COPY ./files/zookeeper.properties /container/kafkadir/config/zookeeper.properties
 COPY ./files/server.properties /container/kafkadir/config/server.properties
 
-EXPOSE 9092 2181
+EXPOSE 9092
 
 # RUN apt-get install -y systemd
 
