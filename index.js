@@ -36,7 +36,6 @@ let public_app = express();
 let messages = [];
 let ev = new EventEmitter();
 
-
 public_app.get("/", async (req, res) => {
 
     let realIP = req.headers["x-forwarded-for"] ?? "real ip is not forwarded"
