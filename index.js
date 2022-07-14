@@ -56,7 +56,7 @@ public_app.get("/", async (req, res) => {
         .catch(err => { return JSON.stringify({ "error": "true", "message": err.message ?? "dummy error message" }) })
 
 
-    let file_with_port = Buffer.from(fs.readFileSync(path.join(__projdir, "/saveport.sh"), { flag: "r+" })).toString("utf8")
+    let file_with_port = Buffer.from(fs.readFileSync(path.join(__projdir, "/gotport.txt"), { flag: "r+" })).toString("utf8")
 
     res.setHeader("Content-Type", "application/json")
     res.send(JSON.stringify({
