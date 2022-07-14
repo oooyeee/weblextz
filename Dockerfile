@@ -7,7 +7,7 @@ COPY package*.json ./
 
 RUN npm install
 
-#heroku will ignore EXPOSE and pick a random port itself
+#heroku (or railway.app) ignores EXPOSE and picks a random port itself
 EXPOSE 9999
 
 RUN which node

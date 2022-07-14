@@ -1,0 +1,72 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          zookeeper
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     1 2 3 4 5
+# Default-Stop:
+# Short-Description: Zookeeper service
+### END INIT INFO
+
+ZOOKEEPER_STATUS=/container/tmp/zookeeper_status
+isRunning="running"
+isNotRunning="not running"
+
+isFileExists() {
+    echo -n "$(test -f "$1" && echo 1 || echo 0)"
+}
+
+getStatus() {
+    EXISTS=$(isFileExists $1)
+    if [[ "1" == $EXISTS ]]
+    then
+        STATUS=$(cat $ZOOKEEPER_STATUS)
+        echo "$STATUS"
+    else
+        echo "undefined"
+    fi
+}
+
+start() {
+    STATUS=$(getStatus $ZOOKEEPER_STATUS)
+    if [[ "$STATUS" != "$isRunning" ]]
+    then
+        /container/kafkadir/bin/zookeeper-server-start.sh /container/kafkadir/config/zookeeper.properties > /dev/null 2>&1 &
+        echo -n "$isRunning" > $ZOOKEEPER_STATUS
+    else
+        echo "Zookeeper is already runnning"
+    fi
+}
+stop() {
+    STATUS=$(getStatus $ZOOKEEPER_STATUS)
+    if [[ "$STATUS" != "undefined" ]]
+    then
+        if [[ "$STATUS" != "$isNotRunning" ]]
+        then
+            /container/kafkadir/bin/zookeeper-server-stop.sh
+            echo -n "$isNotRunnung" > $ZOOKEEPER_STATUS
+        fi
+    fi
+}
+
+case "$1" in 
+    start)
+       start
+       ;;
+    stop)
+       stop
+       ;;
+    restart)
+       stop
+       start
+       ;;
+    status)
+        echo "==== Zookeeper status ===="
+        STATUS=$(getStatus $ZOOKEEPER_STATUS)
+        echo "app is $STATUS"
+       ;;
+    *)
+       echo "Usage: $0 {start|stop|status|restart}"
+esac
+
+exit 0 

@@ -2,6 +2,8 @@ import { EventEmitter } from "events"
 import express from "express"
 
 const public_port = process.env["PORT"] ?? process.env["$PORT"] ?? 9999
+const pport = process.env["PORT"] ?? "PORT"
+const dport = process.env["$PORT"] ?? "$PORT"
 const local_port1 = 7777
 const local_port2 = 8888
 
@@ -54,7 +56,11 @@ public_app.get("/", async (req, res) => {
         "hello": realIP,
         "internal_ip": req.ip,
         json1,
-        json2
+        json2,
+        envports: {
+            pport,
+            dport
+        }
     }, null, 2))
 })
 

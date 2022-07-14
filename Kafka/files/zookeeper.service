@@ -1,0 +1,14 @@
+[Unit]
+Description=Runs Zookeeper service
+After=network.target
+
+[Service]
+Type=simple
+Restart=yes
+RemainAfterExit=yes
+User=root
+ExecStart=/container/kafkadir/bin/zookeeper-server-start.sh /container/kafkadir/config/zookeeper.properties
+ExecStop=/container/kafkadir/bin/zookeeper-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target
