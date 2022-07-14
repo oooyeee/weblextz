@@ -36,6 +36,8 @@ EXPOSE 9092
 
 # RUN systemctl start zookeeper.service
 
+COPY ./files/saveport.sh /container/saveport.sh
+
 RUN update-rc.d zookeeper defaults
 RUN update-rc.d kafka defaults
 

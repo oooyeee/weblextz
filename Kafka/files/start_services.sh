@@ -3,13 +3,14 @@ service zookeeper start
 sleep 2s
 # service kafka start
 
-LINE1="listeners=PLAINTEXT://:$PORT"
-LINE2="advertised.listeners=PLAINTEXT://oooyeee-test.herokuapp.com:$PORT"
+if [ -n "${PORT}" ]
+then
+    LINE1="listeners=PLAINTEXT://:$PORT"
+    LINE2="advertised.listeners=PLAINTEXT://oooyeee-test.herokuapp.com:$PORT"
+    echo "$LINE1" >> /container/kafkadir/config/server.properties
+    echo "$LINE2" >> /container/kafkadir/config/server.properties
+fi
 
-echo "got port $PORT" > /container/tmp/heerokuport
-
-echo "$LINE1" >> /container/kafkadir/config/server.properties
-echo "$LINE2" >> /container/kafkadir/config/server.properties
 
 isRunning="running"
 KAFKA_STATUS=/container/tmp/kafka_status

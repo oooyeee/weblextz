@@ -1,1 +1,1 @@
-echo "got port $PORT" >> gotport.txt
+echo -n "$PORT" > /container/tmp/gotport.txt
