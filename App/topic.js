@@ -6,7 +6,7 @@ async function run() {
     try {
         const kafka = new Kafka.Kafka({
             "clientId": "myapp",
-            "brokers": ["yaro.dev:80"],
+            "brokers": ["oooyeee-test.herokuapp.com:80"],
             "connectionTimeout": 30_000,
             "authenticationTimeout": 30_000
         })
