@@ -5,12 +5,11 @@ sleep 2s
 
 if [ -n "${PORT}" ]
 then
-    LINE1="listeners=PLAINTEXT://:$PORT"
+    LINE1="listeners=PLAINTEXT://0.0.0.0:$PORT"
     LINE2="advertised.listeners=PLAINTEXT://oooyeee-test.herokuapp.com:80"
     echo "$LINE1" >> /container/kafkadir/config/server.properties
     echo "$LINE2" >> /container/kafkadir/config/server.properties
 fi
-
 
 isRunning="running"
 KAFKA_STATUS=/container/tmp/kafka_status
