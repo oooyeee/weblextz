@@ -13,6 +13,8 @@ then
     echo "$LINE2" >> /container/kafkadir/config/server.properties
     echo "$LINE3" >> /container/kafkadir/config/server.properties
     echo "$LINE4" >> /container/kafkadir/config/server.properties
+
+    echo "127.0.0.1 oooyeee-test.herokuapp.com" >> /etc/hosts
 fi
 
 isRunning="running"
