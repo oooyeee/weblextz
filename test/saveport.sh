@@ -1,1 +1,1 @@
-echo -n "$PORT" > /container/tmp/gotport.txt
+echo -n "$PORT" > /app/gotport.txt
