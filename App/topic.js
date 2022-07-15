@@ -6,7 +6,9 @@ async function run() {
     try {
         const kafka = new Kafka.Kafka({
             "clientId": "myapp",
-            "brokers": ["https://oooyeee-test.herokuapp.com:9092"]
+            "brokers": ["oooyeee-test.herokuapp.com:80"],
+            "connectionTimeout": 30_000,
+            "authenticationTimeout": 30_000
         })
 
         const admin = kafka.admin()
@@ -27,7 +29,7 @@ async function run() {
         log("Created Topic Successfully")
         await admin.disconnect();
     } catch (err) {
-        console.log(err.msg ?? "somthing wrong");
+        console.log(err ?? "somthing wrong");
     }
 }
 
